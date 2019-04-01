@@ -32,5 +32,5 @@ The following results were obtained:
 
 ![](https://i.imgur.com/jc6sJVq.png)
 
-Thus indicating that the function works as intended.
+Indicating that the function works as intended.
 
