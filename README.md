@@ -24,7 +24,7 @@ pdf via mle (or mme if convergence fails). Said pdf will be used to form a two-s
 
 # Efficiency
 
-A dataset pertaining to kidney cancer (binary regression) of size (100, 25) was used to simulated an artificial dataset of size (500, 25).
+A dataset pertaining to kidney cancer (binary regression) of size (100, 25) was used to simulate an artificial dataset of size (500, 25).
 The methodology described in the Binary-Classification-workshop repository (model stacking via majority voting) was used to predict the original dataset's outcome variable
 based on a model trained on the artificial data. 
 
