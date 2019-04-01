@@ -74,7 +74,7 @@ if(length(which(is.na(data))) != 0){
 
 }
 
-if(length(integers_only) != 0){data[,integers_only] <- round(round(data[,integers_only]))}
+if(length(integers_only) != 0){data[,integers_only] <- round(data[,integers_only])}
 
 
 #Obtain a numerical equivalent of the original data
@@ -350,6 +350,8 @@ if(outliers.remove == TRUE){
 #Trim extra values if necessary
 
 if(nrow(final_data) > n){final_data <- final_data[c(1:n),]}
+
+if(length(integers_only) != 0){final_data[,integers_only] <- round(final_data[,integers_only])}
 
 return(final_data)
 
