@@ -347,7 +347,7 @@ if(outliers.remove == TRUE){
 
 }
 
-#Trim extra values is necessary
+#Trim extra values if necessary
 
 if(nrow(final_data) > n){final_data <- final_data[c(1:n),]}
 
