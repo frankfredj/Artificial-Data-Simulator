@@ -255,87 +255,9 @@ if(outliers.remove == TRUE){
 
 	stopCluster(cl)
 
-	#Fitting distributions
+	R <- qchisq(0.95, ncol(data))
 
-	distributions <- c("norm", "lnorm", "exp", "cauchy", "gamma", "logis", "weibull", "invgamma", "pareto")
-
-	method = c("mle", "mme", "mge")
-
-	require(actuar)
-	require(stats)
-
-	fitdist_ <- function(i){
-
-	require(fitdistrplus)
-	require(stats)
-
-	for(j in 1:length(method)){
-
-		out <- try(fitdist(radius_vec, distr = distributions[i], method = method[j]))
-
-			if(class(out) != "try-error"){break}
-
-	}
-
-	return(out)
-
-	}
-
-
-	cl <- makeCluster(detectCores() - 2)
-	clusterEvalQ(cl, library(foreach))
-	registerDoParallel(cl)
-
-	fitted_models <- foreach(i = 1:length(distributions), .packages = c("fitdistrplus", "stats", "actuar")) %dopar% fitdist_(i)
-
-	stopCluster(cl)
-
-	rmv <- which(is.na(fitted_models))
-
-	if(length(rmv) != 0){
-
-		fitted_models <- fitted_models[-rmv]
-		distributions <- distributions[-rmv]
-
-	}
-
-	names(fitted_models) <- distributions
-
-	aic <- matrix(nrow = length(fitted_models), ncol = 1)
-	for(i in 1:length(aic)){aic[i] <- fitted_models[[i]]$aic}
-
-	rmv <- which(is.na(aic))
-
-	if(length(rmv) != 0){
-
-		fitted_models <- fitted_models[-rmv]
-		distributions <- distributions[-rmv]
-		aic <- aic[-rmv]
-
-	}
-
-	#Obtaining the best pdf and its parameters
-
-	choice <- order(aic)[1]
-
-	#Contructing the CI
-
-	f <- get(paste("q", distributions[choice], sep = ""))
-
-	args <- list()
-	for(i in 1:length(fitted_models[[choice]]$estimate)){args[[i]] <- fitted_models[[choice]]$estimate[i]}
-
-	names(args) <- names(fitted_models[[choice]]$estimate)
-
-	args_low <- args
-	args_low$p <- 0.025
-
-	args_high <- args
-	args_high$p <- 0.975
-
-	vals <- c(do.call(f, args_low), do.call(f, args_high))
-
-	rmv <- which(radius_vec < vals[1] | radius_vec > vals[2])
+	rmv <- which(radius_vec > R)
 
 	if(length(rmv) != 0){
 
@@ -356,9 +278,3 @@ if(length(integers_only) != 0){final_data[,integers_only] <- round(final_data[,i
 return(final_data)
 
 }
-
-
-
-
-
-
