@@ -19,8 +19,8 @@ range will be removed.
 
 This process is iterated until we obtain a sample of size >= n.
 
-If outliers.remove is set to TRUE, the sum of the squared components of the scaled / centered simulated PC vectors will be used to fit a
-pdf via mle (or mme if convergence fails). Said pdf will be used to form a two-sided 0.95 CI, and outliers will be removed accordingly.
+If outliers.remove is set to TRUE, the sum of the squared components of the scaled / centered simulated PC vectors will be used to look
+for outliers with respect to a Chi-Squared distribution with p degrees of freedom. (Under the assumption that the PC form a multivariate Gaussian distribution with a diagonal v-cov matrix).
 
 # Efficiency
 
