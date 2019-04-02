@@ -230,8 +230,9 @@ final_PC <- final_PC[-1,]
 
 
 #Removing outliers
-#We assume that the sum of the squared components of the scaled / centered PC matrix are distributed according to some unknown pdf
-#Using fitdistr, we try to find the best pdf via mle / mme and use it to produce a two-sided CI at alpha = 0.05
+#We assumed that the PC form a multivariate Gaussian with diagonal v-cov matrix
+#Scaling and centering PCs, then comparing the sum of their squared components with a Chi-Squared (df = p)
+#Alpha = 0.05
 
 if(outliers.remove == TRUE){
 
@@ -278,3 +279,9 @@ if(length(integers_only) != 0){final_data[,integers_only] <- round(final_data[,i
 return(final_data)
 
 }
+
+
+
+
+
+
