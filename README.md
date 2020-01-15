@@ -22,15 +22,5 @@ This process is iterated until we obtain a sample of size >= n.
 If outliers.remove is set to TRUE, the sum of the squared components of the scaled / centered simulated PC vectors will be used to look
 for outliers with respect to a Chi-Squared distribution with p degrees of freedom. (Under the assumption that the PC form a multivariate Gaussian distribution with a diagonal v-cov matrix).
 
-# Efficiency
 
-A dataset pertaining to kidney cancer (binary regression) of size (100, 25) was used to simulate an artificial dataset of size (500, 25).
-The methodology described in the Binary-Classification-workshop repository (model stacking via majority voting) was used to predict the original dataset's outcome variable
-based on a model trained on the artificial data. 
-
-The following results were obtained:
-
-![](https://i.imgur.com/jc6sJVq.png)
-
-Indicating that the function works as intended.
 
